@@ -92,7 +92,7 @@ React and flux allows you to route your app so that you can load different pages
 
 The first thing to do is to make sure we can visit each of theses pages using React routes.
 
-First things first, install `react-router`
+First things first, install `react-router-component`
 
     npm install react-router-component
 
