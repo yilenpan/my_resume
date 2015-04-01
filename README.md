@@ -14,8 +14,7 @@ to a python based back-end. All the code will be up on my
 github.
 
 I've gone ahead and whiteboarded out what it is I want this
-website to look like. Next is to head to balsamiq to do this
-mock up in a png.
+website to look like.
 
 I picked a color palette that I like. It's called Sa Barca de
 Formetera. It's a dark grey, grey, teal, white, yellow combo.
@@ -46,6 +45,83 @@ It's a little dense, so I'll walk you through it.
 First I copied my `package.json` file from my ~/templates folder and ran `npm install`. Then I created a source folder (where I do all of my work), and it makes the boiler plate files I need to build. Lastly I `bower install bootstrap` then open the entire folder in sublime.
 
 Making a new project folder is as simple as making a new dir and calling `newproj`. Something oldly satisfying about that.
+
+# Plan of attack
+
+There are seven pages in this site - splash page, blog, blog post page, resume, about, admin page, and admin login.
+
+- Splash Page
+
+A big normal front page.
+
+- Blog
+
+A listing of all blog posts
+
+- Blog post page
+
+Blog post page
+
+- Resume
+
+Resume
+
+- About
+
+Takes data from users (IP address, forwarding address, visitor count) and uses D3 or something to display. Maybe put IP addresses on google maps.
+
+- Admin
+
+Allows me to make blog posts
+
+- Admin Login
+
+Allows me to login.
+
+# Work flow
+
+I think the best plan of attack is the following.
+
+Mockup -> Routes -> Template -> CRUD -> Styling
+
+We've gone over Mockups, lets talk about Routes.
+
+# Routes
+
+React and flux allows you to route your app so that you can load different pages without having the backend reload the entire page. This means its gentler on the backend server, and data can be passed back and forth using jsons.
+
+The first thing to do is to make sure we can visit each of theses pages using React routes.
+
+First things first, install `react-router`
+
+    npm install react-router-component
+
+Then in the app.js file, we set up our routes.
+
+    var Router = require('react-router-component');
+    var Locations = Router.Locations;
+    var Location = Router.Location;
+    var App...
+
+      <div>
+          <Locations>
+            <Location path="/" handler={Splash} />
+            <Location path="/blog" handler={Blog} />
+            <Location path="/blog/:post" handler={BlogPost} />
+            <Location path="/resume" handler={Resume} />
+            <Location path="/about" handler={About} />
+          </Locations>
+      </div>
+
+Wrap `Location` in a `Locations` tag, then wrap that up in a div. Later when we do templating, change those divs up to an actual template.js
+
+
+
+
+
+
+
+
 
 
 
