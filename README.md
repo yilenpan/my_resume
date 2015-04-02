@@ -192,6 +192,26 @@ So after digging around, the more effective way of loading a resume is to put th
 
 Now it works!
 
+# AJAX headaches
+
+Okay, so after messing around with AJAX, here are a few thoughts on it.
+
+- The A in Ajax stands for asynchronous. This means if you don't wait for the data to come back, you'll be sorry.
+
+I was running into a ton of problems getting my app to load the json data. It was a pain in the ass. For about an hour today, the data from the resume.json was loading, but I couldn't tease it apart. Calling `this.state.data.bio.name` wouldn't work, but I could print `this.state.data.bio`. And when I tried console logging, it would give me a big fat undefined error.
+
+What finally got me to stop spinning my wheels was to think about slow internet. If things are slow, that means you have to wait for things to load. A variable won't be initialized until the ajax call has completed it's task. This means if you try to console log a var, it'll always end up being undefined because the ajax call hasn't finished yet.
+
+What's one way of solving this? Loading screens.
+
+I did my fair share of googling and came across [this](http://stackoverflow.com/questions/27875906/react-js-deep-object-in-state-with-async-data-does-not-work) solution.
+
+    var bio = this.state.data.bio ? <Bio data={this.state.data.bio} /> : <Loading />;
+
+So I separated out the app-resume.js into different components. The above line is as follows: if data.bio doesn't exist, display the Loading component. When data.bio does exist, it will switch over to the Bio component.
+
+This is going to take some more testing, but hopefully this works.
+
 
 
 
