@@ -1,3 +1,8 @@
+To Run
+====
+
+To run the page, open index.html in the dist folder. To look at the code, take a look at the src folder.
+
 Building my Resume
 ====================
 
