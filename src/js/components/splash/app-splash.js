@@ -11,10 +11,6 @@ var Splash = React.createClass({
     return (
         <div className="jumbotron">
             <h1>Splash</h1>
-            <Link href="/blog" onClick={this.record}> blog </Link>
-            <Link href="/blog/1"> blogpost </Link>
-            <Link href="/resume"> resume </Link>
-            <Link href="/about"> about </Link>
         </div>
       );
   }

@@ -159,9 +159,40 @@ The next thing to do is to create stores where the components will fetch data. b
 Later we will need to figure out a way to design a backend that will respond to these api calls. hopefully it goes ok...
 
 
-
 Day 2
 ------------
+
+# Implemeting Flux Architechture
+
+So, I'm sure by now you've seen the videos on Flux and how it changed the way Facebook does it's front end design. It took me a couple of weeks watching and rewatching these videos to finally get a grasp of what was happening. I think I get it...
+
+Basically flux is a design pattern that allows you to mutate your data in the store (model), and have it automatically update all the components that are reliant on that data. Forget MVC for now, this is a completely new way of thinking about front end design.
+
+It goes like this:
+
+The user generates a new Action. This can be an onClick event. The action then calls the Dispatcher and 'dispatches' an action to the store.
+
+The store reads the the dispatcher and executes the function the dispatcher calls via a giant switch statement. This is where the data is changed.
+
+After we change the data, we then need to emit changes. I'm going to use EventEmitter. Once we emit the change, the view updates.
+
+In the component, we need to add two functions in the componentWillMount and the componentWillUnmount sections. In the componentWillMount, we will add a listener, and in the Unmount we'll take that listener off. The view waits for an event from the emitter, which then changes the view.
+
+[Flux for stupid people](http://blog.andrewray.me/flux-for-stupid-people/)
+
+# componentDidMount
+
+Using this train of thought, it'll probably be best to start with building the Actions. But seeing as how we're mainly getting information, rather than setting it, I'm going to set up the stores.
+
+I added ajax functions to the stores and have the views call them. Now I'm running into a bug in the resume component - the json only appears after I click resume the second time. Something isn't adding up.
+
+...
+
+So after digging around, the more effective way of loading a resume is to put the function in the componentDidMount part of the component. So, thats what I did.
+
+Now it works!
+
+
 
 
 

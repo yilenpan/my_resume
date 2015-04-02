@@ -12,6 +12,8 @@ var Splash = require('./splash/app-splash.js'),
 
 var Locations = Router.Locations;
 var Location = Router.Location;
+var SubHeader = require('./template/subheader.js');
+
 
 var APP = React.createClass({
   render: function() {
@@ -22,6 +24,7 @@ var APP = React.createClass({
           <div className="row">
             <SideMenu />
             <div className="col-xs-9">
+              <SubHeader />
               <Locations>
                 <Location path="/" handler={Splash} />
                 <Location path="/blog" handler={Blog} />
