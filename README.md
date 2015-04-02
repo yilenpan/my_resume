@@ -116,6 +116,25 @@ Then in the app.js file, we set up our routes.
 Wrap `Location` in a `Locations` tag, then wrap that up in a div. Later when we do templating, change those divs up to an actual template.js
 
 
+To link, we go to the Splash component and add links.
+
+    var Link = require('react-router-component').Link;
+    ...
+      <Link href="/about"> about </Link>
+    ...
+
+We have our routes done.
+
+The admin pages will be added along side the back-end when I'm adding CRUD functionality to it. Dunno if this is the best approach, but darn it, it's my approach.
+
+# Template
+
+Seeing as we can load everything from a JS, why not build components. We're going to add a header and a sidebar to each of the components and make sure that everything is in nice working order.
+
+I based the design of this site on Mega.co.nz's layout. I think it's cool. Things are going to change, but, I do like me that design.
+
+
+
 
 
 

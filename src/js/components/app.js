@@ -6,6 +6,8 @@ var Splash = require('./splash/app-splash.js'),
     Blog = require('./blog/app-blog.js'),
     BlogPost = require('./blog/app-blogpost.js'),
     Resume = require('./resume/app-resume.js'),
+    Header = require('./template/header.js'),
+    SideMenu = require('./template/sidemenu.js'),
     About = require('./about/app-about.js');
 
 var Locations = Router.Locations;
@@ -15,13 +17,21 @@ var APP = React.createClass({
   render: function() {
     return (
       <div>
-          <Locations>
-            <Location path="/" handler={Splash} />
-            <Location path="/blog" handler={Blog} />
-            <Location path="/blog/:post" handler={BlogPost} />
-            <Location path="/resume" handler={Resume} />
-            <Location path="/about" handler={About} />
-          </Locations>
+          <Header />
+          <div className='container'>
+            <div className="row">
+              <SideMenu />
+              <div className="col-xs-9">
+                <Locations>
+                  <Location path="/" handler={Splash} />
+                  <Location path="/blog" handler={Blog} />
+                  <Location path="/blog/:post" handler={BlogPost} />
+                  <Location path="/resume" handler={Resume} />
+                  <Location path="/about" handler={About} />
+                </Locations>
+              </div>
+            </div>
+          </div>
       </div>
       );
   }
