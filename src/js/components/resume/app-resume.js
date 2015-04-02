@@ -17,13 +17,17 @@ var Resume = React.createClass({
       success: function(data) {
         this.setState({data:data});
       }.bind(this)
-    });
+    })
+  },
+  componentWillMount: function() {
+    console.log('will mount');
+    setTimeout(this.loadResume(), 5000);
   },
   componentDidMount: function() {
+    console.log('did mount');
     this.loadResume();
   },
   render: function(){
-    //TODO: Make new componets for each section of the resume.
     var bio = this.state.data.bio ? <Bio data={this.state.data.bio} /> : <Loading />;
     var projects = this.state.data.projects ? <Projects data={this.state.data.projects} /> : <Loading />;
     return (<div>
