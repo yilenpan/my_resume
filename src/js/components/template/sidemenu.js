@@ -8,7 +8,14 @@ var SideMenu = React.createClass({
     return (
       <div className="col-xs-3">
         <h1> Yilen Pan </h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus amet recusandae quos obcaecati. Id quod, dignissimos, ratione facilis culpa soluta rem rerum minus sit possimus dolor earum placeat voluptates officiis.</p>
+        <p>
+           Lorem ipsum dolor sit amet, consectetur
+           adipisicing elit. Ducimus amet recusandae
+           quos obcaecati. Id quod, dignissimos,
+           ratione facilis culpa soluta rem rerum minus
+           sit possimus dolor earum placeat voluptates
+           officiis.
+        </p>
       </div>
       );
   }

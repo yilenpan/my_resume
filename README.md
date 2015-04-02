@@ -44,7 +44,7 @@ It's a little dense, so I'll walk you through it.
 
 First I copied my `package.json` file from my ~/templates folder and ran `npm install`. Then I created a source folder (where I do all of my work), and it makes the boiler plate files I need to build. Lastly I `bower install bootstrap` then open the entire folder in sublime.
 
-Making a new project folder is as simple as making a new dir and calling `newproj`. Something oldly satisfying about that.
+Making a new project folder is as simple as making a new dir and executing `newproj`. Something oldly satisfying about that.
 
 # Plan of attack
 
@@ -154,9 +154,11 @@ In main.js:
 
 As you can see, we wrap the whole thing in a div and append it to the body. Header comes first, outside of the div.container, then we make a row, then slice up the row 3/9 with side menu and the Locations.
 
-The next thing to do is to create stores where the components will fetch data. before they load. We are going to create some fake data in the form of json files and create functions that call an api to fetch this data.
+The next thing to do is to create stores where the components will fetch data. before they load. We are going to create some fake data in the form of json files and create functions that will fetch this data.
 
 Later we will need to figure out a way to design a backend that will respond to these api calls. hopefully it goes ok...
+
+
 
 Day 2
 ------------
