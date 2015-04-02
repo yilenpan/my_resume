@@ -17,21 +17,21 @@ var APP = React.createClass({
   render: function() {
     return (
       <div>
-          <Header />
-          <div className='container'>
-            <div className="row">
-              <SideMenu />
-              <div className="col-xs-9">
-                <Locations>
-                  <Location path="/" handler={Splash} />
-                  <Location path="/blog" handler={Blog} />
-                  <Location path="/blog/:post" handler={BlogPost} />
-                  <Location path="/resume" handler={Resume} />
-                  <Location path="/about" handler={About} />
-                </Locations>
-              </div>
+        <Header />
+        <div className='container'>
+          <div className="row">
+            <SideMenu />
+            <div className="col-xs-9">
+              <Locations>
+                <Location path="/" handler={Splash} />
+                <Location path="/blog" handler={Blog} />
+                <Location path="/blog/:post" handler={BlogPost} />
+                <Location path="/resume" handler={Resume} />
+                <Location path="/about" handler={About} />
+              </Locations>
             </div>
           </div>
+        </div>
       </div>
       );
   }
