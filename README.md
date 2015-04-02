@@ -134,6 +134,36 @@ Seeing as we can load everything from a JS, why not build components. We're goin
 I based the design of this site on Mega.co.nz's layout. I think it's cool. Things are going to change, but, I do like me that design.
 
 
+Using Bootstraps components I added a `<nav>` elm to the top of the doc. I'm not going to worry about how it looks so far, I'm going to mess with the css later.
+
+In main.js:
+
+    <div>
+      <Header />
+      <div className='container'>
+        <div className="row">
+          <SideMenu />
+          <div className="col-xs-9">
+            <Locations>
+              ...
+            </Locations>
+          </div>
+        </div>
+      </div>
+    </div>
+
+As you can see, we wrap the whole thing in a div and append it to the body. Header comes first, outside of the div.container, then we make a row, then slice up the row 3/9 with side menu and the Locations.
+
+The next thing to do is to create stores where the components will fetch data. before they load. We are going to create some fake data in the form of json files and create functions that call an api to fetch this data.
+
+Later we will need to figure out a way to design a backend that will respond to these api calls. hopefully it goes ok...
+
+Day 2
+------------
+
+
+
+
 
 
 
