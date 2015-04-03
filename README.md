@@ -3,10 +3,13 @@ To Run
 
 To run the page, open index.html in the dist folder. To look at the code, take a look at the src folder.
 
-Building my Resume
--------
 
-#Day 1
+
+This is how I built it!
+
+Day 1
+----
+
 
 # Hello World
 
@@ -218,7 +221,7 @@ This is going to take some more testing, but hopefully this works.
 
 ...
 
-I decided on using an additional state called loading. I saw this solution [here](https://github.com/sthomp/reactjs-tutorial/blob/master/src/tutorial1.js). Down on the bottom is code for a loading screen, which is just what I want. He accomplishes this by using loading as a switch for what to render.
+I decided on using an additional state called loading. I saw this solution [here](https://github.com/sthomp/reactjs-tutorial/blob/master/src/tutorial1.js). Down on the bottom is code for a loading screen, which is just what I want. He accomplishes this by using `loading` as a switch for what to render.
 
 Here is what I did to my Blog component:
 
@@ -249,6 +252,28 @@ Here is what I did to my Blog component:
                 </div>);
       }
     });
+
+I tried the other way, but for some reason it didn't agree with me. Perhaps someone can shed light on why.
+
+But anywho, thats how to do loading screens. Awesome.
+
+Day 3
+----
+
+# Much to do About the About page
+
+I have big plans for the About page. I plan on giving each user a uniq cookie so I can track them. I found an API which converts IP addresses to the corresponding city, which I then plan on putting on a google map. I want a Unique visitor count. A list of referer websites, amount of time spent on each page, etc.
+
+I also want the about page to constantly be updating. This will defintely show off react and flux.
+
+Big plans. Most of which will be done on the backend. But I'm not there yet...
+
+# Making fake data
+
+The problem about fake data is that it has to mimic real data. It's going to suck if I write the front end to respond to one kind of json, get to the backend and realize that it produces another kind of json.
+
+
+
 
 
 
