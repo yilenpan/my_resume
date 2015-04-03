@@ -9,7 +9,7 @@ var Blog = React.createClass({
   getInitialState: function() {
     return {data: [], loading: true};
   },
-  loadBlog: function(){
+  loadBlog: function(){ //TODO: CREATE MIXIN.
     $.ajax({
       url: 'blog.json',//TODO: LINK TO BACKEND
       success: function(data) {
@@ -18,12 +18,16 @@ var Blog = React.createClass({
     });
   },
   componentDidMount: function() {
-    this.loadBlog();
+    var self = this;
+    setTimeout(function(){
+      console.log('did mount');
+      self.loadBlog();
+    }, 1000);
   },
   render: function() {
     var inner;
     if (!this.state.loading){
-      inner = <BlogList data={this.state.data} />;
+      inner = <BlogList data={this.state.data.blog} />;
     } else {
       inner = <Loading />;
     }

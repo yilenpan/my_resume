@@ -5,6 +5,7 @@ var AppStore = require('../../stores/app-store.js');
 var Loading = require('../template/loading.js');
 var Bio = require('./resume-bio.js');
 var Projects = require('./resume-projects.js');
+var Education = require('./resume-education.js');
 
 var Resume = React.createClass({
   getInitialState: function() {
@@ -34,6 +35,7 @@ var Resume = React.createClass({
       inner = (<div>
                 <Bio data={this.state.data.bio} />
                 <Projects data={this.state.data.projects} />
+                <Education data={this.state.data.education} />
               </div>);
     } else {
       inner = <Loading />;

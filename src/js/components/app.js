@@ -24,7 +24,10 @@ var APP = React.createClass({
           <div className="row">
             <SideMenu />
             <div className="col-xs-9">
-              <SubHeader />
+              <div className="col-xs-12">
+                <SubHeader />
+              </div>
+              <div className="col-xs-12">
               <Locations>
                 <Location path="/" handler={Splash} />
                 <Location path="/blog" handler={Blog} />
@@ -32,6 +35,7 @@ var APP = React.createClass({
                 <Location path="/resume" handler={Resume} />
                 <Location path="/about" handler={About} />
               </Locations>
+              </div>
             </div>
           </div>
         </div>

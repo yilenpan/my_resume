@@ -1,14 +1,16 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher.js');
 
 var AppActions = {
-  getResume: function() {
+  getResume: function(resume) {
     AppDispatcher.handleViewAction({
       actionType:'getResume',
+      data: resume
     })
   },
-  getBlogList: function() {
+  getBlog: function(data) {
     AppDispatcher.handleViewAction({
       actionType:'getBlog',
+      data: data
     })
   },
   getBlogPost: function(id) {
