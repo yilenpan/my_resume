@@ -17,7 +17,7 @@ var Blog = React.createClass({
   componentDidMount: function() {
     this.loadBlog();
   },
-  render: function() {
+  render: function() { //TODO: make new blogsnippet component
     return (<div>
             <h1>Blog</h1>
             <p>{this.state.data}</p>
