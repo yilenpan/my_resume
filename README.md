@@ -4,10 +4,9 @@ To Run
 To run the page, open index.html in the dist folder. To look at the code, take a look at the src folder.
 
 Building my Resume
-====================
+-------
 
-Day 1
----------------------
+#Day 1
 
 # Hello World
 
@@ -217,6 +216,39 @@ So I separated out the app-resume.js into different components. The above line i
 
 This is going to take some more testing, but hopefully this works.
 
+...
+
+I decided on using an additional state called loading. I saw this solution [here](https://github.com/sthomp/reactjs-tutorial/blob/master/src/tutorial1.js). Down on the bottom is code for a loading screen, which is just what I want. He accomplishes this by using loading as a switch for what to render.
+
+Here is what I did to my Blog component:
+
+    var Blog = React.createClass({
+      getInitialState: function() {
+        return {data: [], loading: true};
+      },
+      loadBlog: function(){
+        //... ajax call to api
+          success: function(data) { //setState data to data
+                                    //loading to false
+            this.setState({data:data, loading: false});
+          }
+      },
+      componentDidMount: function() {
+        var self = this;
+        setTimeout(self.loadBlog(),1000);//delay to simulate lag
+      },
+      render: function() {
+        var inner;
+        if (!this.state.loading){
+          inner = <BlogList data={this.state.data} />;
+        } else {
+          inner = <Loading />;
+        }
+        return (<div>
+                {inner}
+                </div>);
+      }
+    });
 
 
 

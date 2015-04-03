@@ -7,33 +7,40 @@ var Bio = require('./resume-bio.js');
 var Projects = require('./resume-projects.js');
 
 var Resume = React.createClass({
-  getInitialState: function(){
-    return {data: []};
+  getInitialState: function() {
+    return {data: [], loading: true};
   },
   loadResume: function(){
+    console.log("fetching json");
     $.ajax({
       url: 'resume.json',//TODO: LINK TO BACKEND
       dataType: 'json',
       success: function(data) {
-        this.setState({data:data});
+        console.log('got json');
+        this.setState({data:data, loading:false});
       }.bind(this)
     })
   },
-  componentWillMount: function() {
-    console.log('will mount');
-    setTimeout(this.loadResume(), 5000);
-  },
   componentDidMount: function() {
-    console.log('did mount');
-    this.loadResume();
+    var self = this;
+    setTimeout(function(){
+      console.log('did mount');
+      self.loadResume();
+    }, 1000);
   },
   render: function(){
-    var bio = this.state.data.bio ? <Bio data={this.state.data.bio} /> : <Loading />;
-    var projects = this.state.data.projects ? <Projects data={this.state.data.projects} /> : <Loading />;
+    var inner;
+    if (!this.state.loading){
+      inner = (<div>
+                <Bio data={this.state.data.bio} />
+                <Projects data={this.state.data.projects} />
+              </div>);
+    } else {
+      inner = <Loading />;
+    }
+
     return (<div>
-              <h1>Resume</h1>
-              <div> {bio} </div>
-              <div> {projects} </div>
+              {inner}
             </div>);
   }
 });

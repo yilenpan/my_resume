@@ -4,7 +4,7 @@ var React = require('react');
 var Projects = React.createClass({
   render: function(){
     var data = this.props.data;
-    return <h1>{data[0].title}</h1>;
+    return <h1>{data}</h1>;
   }
 });
 

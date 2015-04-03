@@ -64,5 +64,5 @@ gulp.task('images', function() {
 gulp.task('default', ['browserify', 'replaceHTML', 'buildbower','buildcss','images']);
 
 gulp.task('watch', function() {
-  gulp.watch(path.ALL, ['default']);
+  gulp.watch(path.ALL, ['replaceHTML','browserify']);
 });
