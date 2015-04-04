@@ -8,7 +8,6 @@ var SubHeader = React.createClass({
     return (
         <ul className="nav navbar-nav">
             <li><Link href="/blog"> blog </Link></li>
-            <li><Link href="/blog/1"> blogpost </Link></li>
             <li><Link href="/resume"> resume </Link></li>
             <li><Link href="/about"> about </Link></li>
         </ul>
