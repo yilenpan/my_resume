@@ -31,7 +31,7 @@ var APP = React.createClass({
               <Locations>
                 <Location path="/" handler={Splash} />
                 <Location path="/blog" handler={Blog} />
-                <Location path="/blog/:post" handler={BlogPost} />
+                <Location path="/blog/:id" handler={BlogPost} />
                 <Location path="/resume" handler={Resume} />
                 <Location path="/about" handler={About} />
               </Locations>

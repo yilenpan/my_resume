@@ -5,6 +5,16 @@ var EventEmitter = require('events').EventEmitter;
 
 var CHANGE_EVENT = "change";
 
+var currentBlog = [];
+var currentResume = {};
+var currentAbout = {};
+
+function _addBlog(data){
+  console.log('added data to store');
+  currentBlog = data;
+  console.log(currentBlog);
+}
+
 
 // end store functions
 
@@ -17,32 +27,32 @@ var AppStore = merge(EventEmitter.prototype, {
   },
   removeChangeListener: function(callback){
     this.removeListener(CHANGE_EVENT, callback)
-  }
+  },
   //TODO: Implement actions like sending post data to backend.
-  /*,
+  getBlogPost: function(id) {
+    console.log('fetched blog post #'+id);
+    console.log(currentBlog[id]);
+    return currentBlog[id]; //TODO: make fail safe.
+  },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
     switch(action.actionType){
-      case AppConstants.ADD_ITEM:
-        _addItem(payload.action.item);
+      case 'addBlog':
+        _addBlog(payload.action.data);
         break;
 
-      case AppConstants.REMOVE_ITEM:
-        _removeItem(payload.action.index);
+      case 'addAbout':
+        _increaseItem(payload.action.data);
         break;
 
-      case AppConstants.INCREASE_ITEM:
-        _increaseItem(payload.action.index);
-        break;
-
-      case AppConstants.DECREASE_ITEM:
-        _decreaseItem(payload.action.index);
+      case 'addResume':
+        _addResume(payload.action.data);
         break;
     }
     AppStore.emitChange();
 
     return true;
-  })*/
+  })
 });
 
 

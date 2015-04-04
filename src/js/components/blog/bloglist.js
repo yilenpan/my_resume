@@ -9,9 +9,9 @@ var BlogList = React.createClass({
       var title = data.title;
       var date = data.date;
       var summary = data.summary;
-
+// TODO: Make sure each post has a corresponding id
       return (
-        <div> // TODO: Make sure each post has a corresponding id
+        <div>
           <h1><Link href={"/blog/"+ i }>{title}</Link></h1>
           <h3>{date}</h3>
           <p>{summary}</p>
