@@ -61,7 +61,9 @@ gulp.task('images', function() {
     .pipe(gulp.dest("dist/images"));
 });
 
-gulp.task('default', ['browserify', 'replaceHTML', 'buildbower','buildcss','images']);
+gulp.task('build', ['browserify', 'replaceHTML', 'buildbower','buildcss','images']);
+
+gulp.task('default', ['replaceHTML','browserify']);
 
 gulp.task('watch', function() {
   gulp.watch(path.ALL, ['replaceHTML','browserify']);

@@ -15,7 +15,6 @@ function _addBlog(data){
   console.log(currentBlog);
 }
 
-
 // end store functions
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -33,6 +32,14 @@ var AppStore = merge(EventEmitter.prototype, {
     console.log('fetched blog post #'+id);
     console.log(currentBlog[id]);
     return currentBlog[id]; //TODO: make fail safe.
+  },
+  currentPage: function(page) {
+    console.log('in appStore getting page: ' + page);
+    cpage = (page-1) * 5;
+    return currentBlog.slice(cpage, cpage + 5);
+  },
+  getPageNums: function(){
+    return Math.ceil(currentBlog.length / 5);
   },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction

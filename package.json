@@ -17,13 +17,20 @@
     "ll": "^0.0.1",
     "react": "^0.13.1",
     "react-router-component": "^0.24.4",
-    "reactify": "^1.1.0"
+    "reactify": "^1.1.0",
+    "react-tools" : "*"
   },
   "devDependencies": {
+    "babel-jest": "*",
     "jest-cli": "^0.4.0"
   },
   "scripts": {
-    "test": "node ./node_modules/jest-cli/bin/jest.js"
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": ["es6", "js"],
+    "moduleFileExtensions": ["js", "json", "es6"]
   },
   "keywords": [],
   "author": "Yilen Pan",

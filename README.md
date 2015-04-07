@@ -273,7 +273,28 @@ Big plans. Most of which will be done on the backend. But I'm not there yet...
 The problem about fake data is that it has to mimic real data. It's going to suck if I write the front end to respond to one kind of json, get to the backend and realize that it produces another kind of json.
 
 
+# The issue with stores.
 
+So, I want to be able to call data from the stores. That means in the ajax call, we're going to update the stores. Then when we call that data, we call it from the stores.
+
+
+# Day 4
+
+# using jest
+
+Today I'm going to try and paginate the blog. currently, bloglist returns the entire blog, content and all, and that's no good. So this is what it should do.
+
+On the bottom of the blog page, there should be a page count. I still think bloglist should get a bloglist.json, but it should only have title, date, and summary. When the blog post link is clicked, it should make an ajax call to the server and return the blog post, with content.
+
+just to think about the backend for a moment, the DB.model should look like it is now, but when /blog.json is called, it should be `SELECT title, date, summary from Blog`, and when /blog/:id/.json is called, it should return `select * from Blog where id = *id*`.
+
+there should be a pagination component that sends a page number to a function in the store called `currentPage`. the currentPage function should update the blog list and the bloglist should display the current page.
+
+We are going to write the tests for it. First it should require the pagination component and the store. It should divide the number of blogposts by 5 and list the number of pages. On load, the bloglist should return the first 5 results of the page. clicking on the second should return the next 5, etc. clicking on the pages should update the bloglist. finally clicking on the title will send an ajax call to the server and return the blog post.
+
+let's get writing these tests.
+
+First thing we need to do is make a folder in the root directory called __tests__. inside of the folder are our tests. According to the guy who wrote jest, every test runs in paralell, which means its faster to split up the test into different files rather than just have one big file.
 
 
 

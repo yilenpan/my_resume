@@ -1,0 +1,23 @@
+{
+  "name": "resume",
+  "version": "0.0.1",
+  "homepage": "https://github.com/yilenpan/my_resume",
+  "authors": [
+    "Yilen <yilen.pan@gmail.com>"
+  ],
+  "description": "my resume",
+  "keywords": [
+    "resume"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
