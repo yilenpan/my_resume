@@ -29,12 +29,12 @@ var Resume = React.createClass({
   componentDidMount: function() {
     var self = this;
     console.log('did mount');
-    setTimeout(function(){
-      self.loadResume();
-    }, 1000);
+    //setTimeout(function(){
+    self.loadResume();
+    //}, 1000);
   },
   render: function(){
-    console.log('render');
+    console.log('render resume');
     var inner;
     if (!this.state.loading){
       inner = (<div>

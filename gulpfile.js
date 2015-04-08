@@ -46,14 +46,11 @@ gulp.task('buildcss', function() {
     .pipe(gulp.dest('dist/styles'));
 });
 
-gulp.task('replaceHTML', function() {
+gulp.task('copy', function(){
   gulp.src(path.HTML)
-    .pipe(htmlreplace({
-      'js' : 'js/utils/dep.min.js',
-      'css' : 'styles/main.min.css'
-    }))
-    .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('dist'));
 });
+
 
 gulp.task('images', function() {
   gulp.src(path.IMAGES)
@@ -61,10 +58,10 @@ gulp.task('images', function() {
     .pipe(gulp.dest("dist/images"));
 });
 
-gulp.task('build', ['browserify', 'replaceHTML', 'buildbower','buildcss','images']);
+gulp.task('build', ['browserify', 'copy', 'buildbower','buildcss','images']);
 
-gulp.task('default', ['replaceHTML','browserify']);
+gulp.task('default', ['copy','browserify']);
 
 gulp.task('watch', function() {
-  gulp.watch(path.ALL, ['replaceHTML','browserify']);
+  gulp.watch(path.ALL, ['browserify']);
 });

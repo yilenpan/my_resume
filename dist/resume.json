@@ -1,19 +1,12 @@
 {
     "bio":{
         "name":"Yilen Pan",
-        "role":"Front-End/Full-Stack wannabe",
-        "skills":["Ruby","Javascript",
-                  "HTML","Python","Ruby on Rails",
-                  "Twitter Bootstrap"],
-        "contact":{
-            "email":"Yilen.Pan@gmail.com",
-            "phone":"510-207-9833",
-            "github":"yilenpan",
-            "twitter":"@YiPz",
-            "location":"Oakland, CA, USA"
-            },
-        "biopic":"images/fry.jpg",
-        "welcomeMessage":"Welcome to my resume!"
+        "role":"Front-End Developer",
+        "skills":[{"language":"Python", "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2000px-Python-logo-notext.svg.png"},
+                  {"language":"Javascript", "img":"http://www.javatpoint.com/images/javascript/javascript_logo.png"},
+                  {"language":"HTML/CSS", "img":"http://www.chicagocomputerclasses.com/wp-content/uploads/2014/04/html5-css31.png"},
+                  {"language":"Ruby", "img":"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSnk1HRfLNDR-MfDlGaeg4zI1dSVEfrEwDPmsfyDvdqU33H3rbO"},
+                  {"language":"ReactJS Framework", "img":"http://facebook.github.io/react/img/logo_og.png"}]
     },
     "projects":{
         "projects":[

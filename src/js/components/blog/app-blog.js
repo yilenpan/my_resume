@@ -5,7 +5,6 @@ var Loading = require('../template/loading.js');
 var BlogList = require("./bloglist.js");
 var AppActions = require('../../actions/app-actions.js');
 
-//TODO: split the paginate into it's own module.
 var Blog = React.createClass({
   getInitialState: function() {
     return {currentPage: [], loading: true, pNum: 1};
@@ -31,10 +30,10 @@ var Blog = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
-    setTimeout(function(){
+    //setTimeout(function(){
       //console.log('did mount');
-      self.loadBlog();
-    }, 1000);
+    self.loadBlog();
+    //}, 1000);
   },
   downPage:function(){
     var p = this.state.pNum - 1;
@@ -51,7 +50,7 @@ var Blog = React.createClass({
     var pageNums = [], pages = AppStore.getPageNums();
     for (var i = 1; i <= pages; i++){
       pageNums.push(<li>
-                      <button className="btn btn-primary" onClick={this.changePage} value={i}>
+                      <button className="btn btn-default" onClick={this.changePage} value={i}>
                         {i}
                       </button>
                     </li>);
@@ -59,12 +58,12 @@ var Blog = React.createClass({
     if (!this.state.loading){
         var prev = this.state.pNum > 1 ? (
                     <li>
-                      <button className="btn btn-primary" onClick={this.downPage}>
+                      <button className="btn btn-default" onClick={this.downPage}>
                         <span>Prev.</span>
                       </button>
                     </li>) : <li></li>;
         var next = this.state.pNum < pages ? (<li>
-                        <button className="btn btn-primary" onClick={this.upPage}>
+                        <button className="btn btn-default" onClick={this.upPage}>
                           <span>Next</span>
                         </button>
                       </li>) : <li></li>;

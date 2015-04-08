@@ -3,8 +3,9 @@
 var React = require('react');
 var Education = React.createClass({
   render: function(){
-    var data = this.props.data;
-    return <p>{data}</p>;
+    var schools = this.props.data.schools;
+    var onlineCourses = this.props.data.onlineCourses;
+    return (<div className="col-xs-12"><p>{schools}</p></div>);
   }
 });
 
