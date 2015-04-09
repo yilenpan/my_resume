@@ -1,6 +1,26 @@
 img {
   height: 200px;
 }
+.sidemenu {
+  background-color: #333333;
+  color: #EFEFEF;
+  height:100%;
+}
+.content {
+  height:100%;
+  padding:0;
+  overflow-y:auto;
+}
 .container {
-  margin:0 0 0 0;
+  width: 100%;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+.row {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+.navbar {
+  border: 0;
+  background-color: #EFEFEF;
 }

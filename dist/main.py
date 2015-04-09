@@ -43,6 +43,14 @@ class IndexPage(Handler):
     def get(self):
         self.render_index()
 
+class BlogPostPage(Handler):
+    def render_json(self, page):
+        self.response.headers['Content-Type'] = 'application/json'
+        #SELECT * FROM BlogPosts WHERE id = page
+        self.write(json.dumps(BLOG['blog'][int(page)]))
+    def get(self, page):
+        self.render_json(page)
+
 class ResumeJSON(Handler):
     def render_json(self):
         self.response.headers['Content-Type'] = 'application/json'
@@ -76,7 +84,10 @@ app = webapp2.WSGIApplication([
     ('/resume.json', ResumeJSON),
     ('/resume', IndexPage),
     ('/blog', IndexPage),
-    ('/blog/([0-9]+)', IndexPage),
+    ('/blog/([0-9]+)', BlogPostPage),
+    ('/admin', IndexPage), #TODO: Make an admin page which accepts post requests in json
+    ('/admin/blog', IndexPage),
+    ('/admin/resume', IndexPage),
     ('/about', IndexPage),
     ('/about.json', AboutJSON),
     ('/blog.json', BlogJSON),

@@ -14,6 +14,7 @@ var SideMenu = React.createClass({
       url: 'contact.json',
       dataType: 'json',
       success: function(data) {
+        console.log(data);
         this.setState({contact: data.contact,loading:false});
       }.bind(this)
     });
@@ -27,6 +28,7 @@ var SideMenu = React.createClass({
   render: function(){
     var inner;
     var c = this.state.contact;
+    var img = c.img;
     var name = c.name;
     var github = c.github;
     var email = c.email;
@@ -35,7 +37,8 @@ var SideMenu = React.createClass({
     var location = c.location;
 
     if (!this.state.loading){
-      inner = (<div className="col-xs-3">
+      inner = (<div>
+                <a href="/"><img className="img-responsive" src={img} alt="profile pic"/></a>
                 <h1> {name} </h1>
                 <span> {github} </span>
                 <span> {email} </span>
@@ -44,9 +47,9 @@ var SideMenu = React.createClass({
                 <span> {location} </span>
               </div>);
     } else {
-      inner = (<div className="col-xs-3"><h1> LOADING </h1></div>);
+      inner = (<div><Loading /></div>);
     }
-    return <div>{inner}</div>;
+    return inner;
   }
 });
 

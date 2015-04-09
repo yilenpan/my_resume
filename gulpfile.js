@@ -14,8 +14,8 @@ var path = {
   ALL: ['src/images/*.*',
         'src/js/*.js',
         'src/js/**/*.js',
-        'src/css/*.css',
-        'src/index.html'],
+        'src/index.html',
+        'src/styles/*.css'],
   JS: ['bower_components/jquery/dist/jquery.js',
        'bower_components/bootstrap/dist/js/bootstrap.js'],
   CSS: ['bower_components/bootstrap/dist/css/bootstrap.css',
@@ -60,8 +60,8 @@ gulp.task('images', function() {
 
 gulp.task('build', ['browserify', 'copy', 'buildbower','buildcss','images']);
 
-gulp.task('default', ['copy','browserify']);
+gulp.task('default', ['copy','browserify', 'buildcss']);
 
 gulp.task('watch', function() {
-  gulp.watch(path.ALL, ['browserify']);
+  gulp.watch(path.ALL, ['default']);
 });

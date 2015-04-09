@@ -63,6 +63,7 @@ RESUME = {
 
 CONTACT = {
     "contact":{
+        "img":"https://placekitten.com/g/200/300",
         "name":"Yilen Pan",
         "email":"Yilen.Pan@gmail.com",
         "phone":"510-207-9833",

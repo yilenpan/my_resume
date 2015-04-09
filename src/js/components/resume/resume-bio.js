@@ -15,7 +15,7 @@ var Bio = React.createClass({
     });
 
 
-    return (<div className="col-xs-12">
+    return (<div className="row">
             <h1>{name}</h1>
             <h3>{title}</h3>
             <h2>Skills</h2>

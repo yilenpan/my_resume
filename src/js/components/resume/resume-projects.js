@@ -5,15 +5,19 @@ var Projects = React.createClass({
   render: function(){
     var data = this.props.data.projects.map(function(project){
       return (
-        <ul>
-          <li><h2>{project.title}</h2></li>
-          <li><h3>{project.datesWorked}</h3></li>
-          <li><span>{project.description}</span></li>
-          <li><img src={project.images} /></li>
-        </ul>
+        <div className="col-sm-6 col-md-4">
+          <div className="thumbnail">
+            <img src={project.images} alt={project.title} />
+            <div className="caption">
+              <h4>{project.datesWorked}</h4>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+            </div>
+          </div>
+        </div>
         );
     });
-    return <div className="col-xs-12">
+    return <div className="row">
             {data}
            </div>;
   }

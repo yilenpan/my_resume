@@ -11,7 +11,7 @@ var Blog = React.createClass({
   },
   loadBlog: function(){ //TODO: CREATE MIXIN.
     $.ajax({
-      url: './blog.json',//TODO: LINK TO BACKEND
+      url: './blog.json',
       success: function(data) {
         AppActions.addBlog(data.blog);
         this.getCurrentPage(1);
@@ -29,11 +29,7 @@ var Blog = React.createClass({
     this.getCurrentPage(page);
   },
   componentDidMount: function() {
-    var self = this;
-    //setTimeout(function(){
-      //console.log('did mount');
-    self.loadBlog();
-    //}, 1000);
+    this.loadBlog();
   },
   downPage:function(){
     var p = this.state.pNum - 1;

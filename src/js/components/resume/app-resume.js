@@ -15,10 +15,9 @@ var Resume = React.createClass({
   loadResume: function(){
     console.log("fetching json");
     $.ajax({
-      url: 'resume.json',//TODO: LINK TO BACKEND
+      url: 'resume.json',
       dataType: 'json',
       success: function(data) {
-        //console.log('got json');
         this.setState({data:data, loading:false, points:this.getPoints()});
       }.bind(this)
     })
@@ -27,30 +26,28 @@ var Resume = React.createClass({
     return [{latitude:37.779277,longitude:-122.41927,title:"sexy"}];
   },
   componentDidMount: function() {
-    var self = this;
-    console.log('did mount');
-    //setTimeout(function(){
-    self.loadResume();
-    //}, 1000);
+    this.loadResume();
   },
   render: function(){
     console.log('render resume');
     var inner;
     if (!this.state.loading){
-      inner = (<div>
+      inner = (<div className="container">
                 <Bio data={this.state.data.bio} />
+                <h1> Projects </h1>
                 <Projects data={this.state.data.projects} />
+                <h1> Education </h1>
                 <Education data={this.state.data.education} />
+                <h1> Where I worked </h1>
                 <Map latitude={37.779277} longitude={-122.41927} zoom={12} width={600} height={400}
                 points={this.state.points}/>
-              </div>);
+              </div>
+              );
     } else {
       inner = <Loading />;
     }
 
-    return (<div>
-              {inner}
-            </div>);
+    return inner;
   }
 });
 

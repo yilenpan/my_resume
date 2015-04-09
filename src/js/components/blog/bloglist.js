@@ -12,7 +12,7 @@ var BlogList = React.createClass({
       // TODO: Make sure each post has a corresponding id
       return (
         <div>
-          <h1><Link href={"/blog/"+ i }>{title}</Link></h1>
+          <h1><Link href={"/blog/" + i }>{title}</Link></h1>
           <h3>{date}</h3>
           <p>{summary}</p>
         </div>

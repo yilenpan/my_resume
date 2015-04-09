@@ -296,6 +296,11 @@ let's get writing these tests.
 
 First thing we need to do is make a folder in the root directory called __tests__. inside of the folder are our tests. According to the guy who wrote jest, every test runs in paralell, which means its faster to split up the test into different files rather than just have one big file.
 
+# Day 5
+
+# Admin
+
+So first off, I've changed the look of the resume site. I still need to come up with a cool splash page, and I need to
 
 
 

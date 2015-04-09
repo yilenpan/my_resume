@@ -9,21 +9,13 @@ var About = React.createClass({
   },
   loadAbout: function(){
     $.ajax({
-      url: 'about.json',//TODO: LINK TO BACKEND
+      url: 'about.json',
       success: function(data) {
         console.log(data.locations);
         this.setState({data:data, points:data.locations});
       }.bind(this)
     });
   },
-  /*getPoints: function(locations){
-    var result = [];
-    locations.map(function(location){
-      result.push({latitude:location.latitude,longitude: location.longitude, title: "point"});
-    });
-    console.log(result);
-    return result;
-  },*/
   componentDidMount: function() {
     this.loadAbout();
   },

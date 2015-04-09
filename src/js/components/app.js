@@ -18,24 +18,21 @@ var SubHeader = require('./template/subheader.js');
 var APP = React.createClass({
   render: function() {
     return (
-      <div>
-        <Header />
-        <div className='container'>
-          <div className="row">
+      <div className="container">
+        <div className='row'>
+          <div className="sidemenu col-xs-3">
             <SideMenu />
-            <div className="col-xs-9">
-              <div className="col-xs-12">
-                <SubHeader />
-              </div>
-              <div className="col-xs-12">
-              <Locations>
-                <Location path="/" handler={Splash} />
-                <Location path="/blog" handler={Blog} />
-                <Location path="/blog/:id" handler={BlogPost} />
-                <Location path="/resume" handler={Resume} />
-                <Location path="/about" handler={About} />
-              </Locations>
-              </div>
+          </div>
+          <div className="col-xs-9 content">
+            <SubHeader />
+            <div className="col-xs-12">
+            <Locations>
+              <Location path="/" handler={Splash} />
+              <Location path="/blog" handler={Blog} />
+              <Location path="/blog/:id" handler={BlogPost} />
+              <Location path="/resume" handler={Resume} />
+              <Location path="/about" handler={About} />
+            </Locations>
             </div>
           </div>
         </div>

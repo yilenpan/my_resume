@@ -1,23 +1,45 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var AppStore = require('../../stores/app-store.js');
-var AppActions = require('../../actions/app-actions.js');
+var Loading = require('../template/loading.js');
 
 var BlogPost = React.createClass({
-  //TODO: set this.props.id as the ajax url
-  //make call to url and retrieve data.
-  //clean up appstore.
   getInitialState: function(){
-    var id = this.props.id;
-    return {content:AppStore.getBlogPost(id)};
+    console.log(this.props.id);
+    return {content:{}, url: this.props.id, loading: true};
+  },
+  getPost: function(){
+    console.log(this.state.url);
+    $.ajax({
+      url: this.state.url,
+      success: function(data) {
+        this.setState({content: data, loading: false});
+      }.bind(this)
+    });
+  },
+  componentDidMount:function(){
+    this.getPost();
   },
   render: function(){
-    console.log('in component');
-    return (<div>
-              <h1>BlogPost</h1>
-              <p>{this.state.content}</p>
-            </div>);
+    var d = this.state.content;
+    var title = d.title;
+    var content = d.content;
+    var date = d.date;
+    var inner;
+    if (!this.state.loading){
+      inner = (
+              <div className="col-xs-11">
+                <h1>{title}</h1>
+                <h4>{date}</h4>
+                <p>{content}</p>
+              </div>
+              );
+    } else {
+      inner = (<div className="col-xs-11"><Loading /></div>);
+    }
+
+    return inner;
+
   }
 });
 

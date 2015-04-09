@@ -27,12 +27,6 @@ var AppStore = merge(EventEmitter.prototype, {
   removeChangeListener: function(callback){
     this.removeListener(CHANGE_EVENT, callback)
   },
-  //TODO: Implement actions like sending post data to backend.
-  getBlogPost: function(id) {
-    console.log('fetched blog post #'+id);
-    console.log(currentBlog[id]);
-    return currentBlog[id]; //TODO: make fail safe.
-  },
   currentPage: function(page) {
     console.log('in appStore getting page: ' + page);
     cpage = (page-1) * 5;
