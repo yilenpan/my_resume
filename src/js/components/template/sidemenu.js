@@ -3,7 +3,12 @@
 var React = require('react');
 var Link = require('react-router-component').Link;
 var Loading = require('./loading.js');
+var AppStore = require('../../stores/app-store.js');
+var AppActions = require('../../actions/app-actions.js');
 
+function getContact() {
+  return AppStore.getContact();
+}
 
 var SideMenu = React.createClass({
   getInitialState: function(){
@@ -14,8 +19,8 @@ var SideMenu = React.createClass({
       url: 'contact.json',
       dataType: 'json',
       success: function(data) {
-        console.log(data);
-        this.setState({contact: data.contact,loading:false});
+        AppActions.setContact(data);
+        this.setState({contact: getContact().contact,loading:false});
       }.bind(this)
     });
   },

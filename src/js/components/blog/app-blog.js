@@ -15,6 +15,7 @@ var Blog = React.createClass({
   },
   componentWillUnmount: function(){
     AppStore.removeChangeListener(this._onChange);
+    clearInterval(AppStore.checkAdmin(this.setAdmin));
   },
   setAdmin: function(isAdmin){
     this.setState(isAdmin);
@@ -41,7 +42,7 @@ var Blog = React.createClass({
   },
   componentDidMount: function() {
     this.loadBlog();
-    AppStore.checkAdmin(this.setAdmin);
+    setInterval(AppStore.checkAdmin(this.setAdmin), 5000);
   },
   downPage:function(){
     var p = this.state.pNum - 1;

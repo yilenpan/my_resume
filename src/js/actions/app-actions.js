@@ -13,6 +13,12 @@ var AppActions = {
       data: data
     })
   },
+  setContact: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType:'setContact',
+      data: data
+    })
+  },
   addBlogPost: function(data) {
     AppDispatcher.handleViewAction({
       actionType:'addBlogPost',

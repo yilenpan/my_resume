@@ -8,6 +8,7 @@ var CHANGE_EVENT = "change";
 var currentBlog = [];
 var currentResume = {};
 var currentAbout = {};
+var currentContact;
 
 function _getBlog(data){
   console.log('added data to store');
@@ -18,6 +19,10 @@ function _getBlog(data){
 function _addBlogPost(post){
   currentBlog.unshift(post);
   //ajax post to server with new post.
+}
+
+function _setContact(data) {
+  currentContact = data;
 }
 
 // end store functions
@@ -45,6 +50,9 @@ var AppStore = merge(EventEmitter.prototype, {
     var data = {isAdmin: true};
     callback(data);
   },
+  getContact: function(){
+    return currentContact;
+  },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
     switch(action.actionType){
@@ -62,6 +70,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'addBlogPost':
         _addBlogPost(payload.action.data);
+        break;
+
+      case 'setContact':
+        _setContact(payload.action.data);
         break;
     }
     AppStore.emitChange();
