@@ -9,10 +9,15 @@ var currentBlog = [];
 var currentResume = {};
 var currentAbout = {};
 
-function _addBlog(data){
+function _getBlog(data){
   console.log('added data to store');
   currentBlog = data;
   console.log(currentBlog);
+}
+
+function _addBlogPost(post){
+  currentBlog.unshift(post);
+  //ajax post to server with new post.
 }
 
 // end store functions
@@ -35,11 +40,16 @@ var AppStore = merge(EventEmitter.prototype, {
   getPageNums: function(){
     return Math.ceil(currentBlog.length / 5);
   },
+  checkAdmin: function(callback){
+    console.log("in store, checking admin: "+document.cookie);//makes ajax call to see if admin
+    var data = {isAdmin: true};
+    callback(data);
+  },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
     switch(action.actionType){
-      case 'addBlog':
-        _addBlog(payload.action.data);
+      case 'getBlog':
+        _getBlog(payload.action.data);
         break;
 
       case 'addAbout':
@@ -48,6 +58,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'addResume':
         _addResume(payload.action.data);
+        break;
+
+      case 'addBlogPost':
+        _addBlogPost(payload.action.data);
         break;
     }
     AppStore.emitChange();

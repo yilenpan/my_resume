@@ -20,10 +20,7 @@ var SideMenu = React.createClass({
     });
   },
   componentDidMount: function(){
-    //var self = this;
-    //setTimeout(function(){
     this.loadContact();
-      //}, 1000);
   },
   render: function(){
     var inner;

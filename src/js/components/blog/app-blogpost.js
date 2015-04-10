@@ -6,7 +6,7 @@ var Loading = require('../template/loading.js');
 var BlogPost = React.createClass({
   getInitialState: function(){
     console.log(this.props.id);
-    return {content:{}, url: this.props.id, loading: true};
+    return {content:{}, url: "json/"+this.props.id, loading: true};
   },
   getPost: function(){
     console.log(this.state.url);

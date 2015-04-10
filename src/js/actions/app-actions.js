@@ -7,9 +7,15 @@ var AppActions = {
       data: resume
     })
   },
-  addBlog: function(data) {
+  getBlog: function(data) {
     AppDispatcher.handleViewAction({
-      actionType:'addBlog',
+      actionType:'getBlog',
+      data: data
+    })
+  },
+  addBlogPost: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType:'addBlogPost',
       data: data
     })
   },

@@ -4,32 +4,44 @@ var AppStore = require('../../stores/app-store.js');
 var Loading = require('../template/loading.js');
 var BlogList = require("./bloglist.js");
 var AppActions = require('../../actions/app-actions.js');
+var AdminAddBlog = require('../admin/add-blog.js');
 
 var Blog = React.createClass({
   getInitialState: function() {
-    return {currentPage: [], loading: true, pNum: 1};
+    return {isAdmin: false, currentPage: [], loading: true, pNum: 1};
+  },
+  componentWillMount: function(){
+    AppStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function(){
+    AppStore.removeChangeListener(this._onChange);
+  },
+  setAdmin: function(isAdmin){
+    this.setState(isAdmin);
+  },
+  _onChange: function(){
+    this.getCurrentPage(1);
   },
   loadBlog: function(){ //TODO: CREATE MIXIN.
     $.ajax({
       url: './blog.json',
       success: function(data) {
-        AppActions.addBlog(data.blog);
+        AppActions.getBlog(data.blog);
         this.getCurrentPage(1);
         this.setState({loading: false});
       }.bind(this)
     });
   },
   getCurrentPage: function(page){
-    //console.log('getCurrentPage: ' + page);
     this.setState({currentPage: AppStore.currentPage(page), pNum: parseInt(page)});
   },
   changePage: function(item){
-    //console.log("changePage clicked -> " + item.target.value);
     var page = item.target.value;
     this.getCurrentPage(page);
   },
   componentDidMount: function() {
     this.loadBlog();
+    AppStore.checkAdmin(this.setAdmin);
   },
   downPage:function(){
     var p = this.state.pNum - 1;
@@ -43,6 +55,11 @@ var Blog = React.createClass({
   },
   render: function() {
     var inner;
+    var admin = <div></div>;
+    if(this.state.isAdmin){
+      admin = <AdminAddBlog />;
+    }
+
     var pageNums = [], pages = AppStore.getPageNums();
     for (var i = 1; i <= pages; i++){
       pageNums.push(<li>
@@ -65,6 +82,8 @@ var Blog = React.createClass({
                       </li>) : <li></li>;
         inner = (
                 <div>
+                  <div className="col-md-3"><h1>Blog</h1></div>
+                  {admin}
                   <BlogList data={this.state.currentPage} />
                   <nav>
                     <ul className="pagination pagination-sm">
