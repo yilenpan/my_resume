@@ -1,9 +1,9 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher.js');
 
 var AppActions = {
-  addResume: function(resume) {
+  setResume: function(resume) {
     AppDispatcher.handleViewAction({
-      actionType:'getResume',
+      actionType:'setResume',
       data: resume
     })
   },
@@ -28,6 +28,12 @@ var AppActions = {
   addAbout: function(data) {
     AppDispatcher.handleViewAction({
       actionType:'getAbout',
+      data: data
+    })
+  },
+  updateContact: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType:"updateContact",
       data: data
     })
   }

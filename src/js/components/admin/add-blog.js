@@ -4,6 +4,10 @@ var React = require('react');
 var AppStore = require('../../stores/app-store.js');
 var AppActions = require('../../actions/app-actions.js');
 
+function summarize(string){
+  return string.slice(0, parseInt(string.length / 4)) + "...";
+}
+
 var AdminAddBlog = React.createClass({
   getInitialState: function(){
     return {showPostForm: false};
@@ -17,8 +21,12 @@ var AdminAddBlog = React.createClass({
   },
   addPost: function(e){
     e.preventDefault();
-    var date = new Date();
-    var data = {title:"Dummy Post", "summary": "data", "content": "dummy content", "date": date.toString()};
+    var d = new Date();
+    var date = d.getMonth() + '/' + d.getDate() + "/" + d.getFullYear();
+    var title = React.findDOMNode(this.refs.title).value.trim();
+    var content = React.findDOMNode(this.refs.post).value.trim();
+    var data = {title:title, summary: summarize(content), content: content, date: date.toString()};
+    console.log(data);
     AppActions.addBlogPost(data);
     this.showPostForm();
     //send data to server
@@ -36,13 +44,13 @@ var AdminAddBlog = React.createClass({
                       <div className="form-group">
                         <label className="col-sm-2 control-label">Title</label>
                         <div className="col-sm-10">
-                          <input className="form-control" type="text" name="title" placeholder="Title" />
+                          <input ref="title" className="form-control" type="text" placeholder="Title" />
                         </div>
                       </div>
                       <div className="form-group">
                         <label className="col-sm-2 control-label">Post</label>
                         <div className="col-sm-10">
-                          <textarea className="form-control" rows="10" name="post" placeholder="Post..." />
+                          <textarea ref="post" className="form-control" rows="10" placeholder="Post..." />
                         </div>
                       </div>
                       <div className="form-group">

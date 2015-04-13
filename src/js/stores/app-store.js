@@ -9,6 +9,7 @@ var currentBlog = [];
 var currentResume = {};
 var currentAbout = {};
 var currentContact;
+var bio, projects, education;
 
 function _getBlog(data){
   console.log('added data to store');
@@ -22,7 +23,21 @@ function _addBlogPost(post){
 }
 
 function _setContact(data) {
+  console.log('_setContact set');
   currentContact = data;
+  console.log(currentContact);
+}
+
+function _updateContact(data) {
+  _setContact({contact: data});
+  console.log('"sending" new contact to server');
+  //make ajax post to the server
+}
+
+function _setResume(data) {
+  bio = data.bio;
+  projects = data.projects;
+  education = data.education;
 }
 
 // end store functions
@@ -51,7 +66,9 @@ var AppStore = merge(EventEmitter.prototype, {
     callback(data);
   },
   getContact: function(){
-    return currentContact;
+    console.log("fetching contact from getContact");
+    console.log(currentContact);
+    return currentContact.contact;
   },
   dispatcherIndex: AppDispatcher.register(function(payload){
     var action = payload.action; // this is our action from handleViewAction
@@ -64,8 +81,8 @@ var AppStore = merge(EventEmitter.prototype, {
         _increaseItem(payload.action.data);
         break;
 
-      case 'addResume':
-        _addResume(payload.action.data);
+      case 'setResume':
+        _setResume(payload.action.data);
         break;
 
       case 'addBlogPost':
@@ -74,6 +91,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'setContact':
         _setContact(payload.action.data);
+        break;
+
+      case 'updateContact':
+        _updateContact(payload.action.data);
         break;
     }
     AppStore.emitChange();

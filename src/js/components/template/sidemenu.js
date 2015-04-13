@@ -5,6 +5,7 @@ var Link = require('react-router-component').Link;
 var Loading = require('./loading.js');
 var AppStore = require('../../stores/app-store.js');
 var AppActions = require('../../actions/app-actions.js');
+var AdminContact = require("../admin/admin-contact.js");
 
 function getContact() {
   return AppStore.getContact();
@@ -12,23 +13,30 @@ function getContact() {
 
 var SideMenu = React.createClass({
   getInitialState: function(){
-    return {contact: {}, loading:false};
+    return {contact: {}, loading:true, isAdmin: false};
+  },
+  componentWillMount: function(){
+    this.loadContact();
   },
   loadContact: function(){
+    console.log('loadContact sidemenu');
     $.ajax({
       url: 'contact.json',
       dataType: 'json',
       success: function(data) {
+        console.log('completed ajax call in sidemenu' + data);
         AppActions.setContact(data);
-        this.setState({contact: getContact().contact,loading:false});
+        this.setState({contact: getContact(),loading:false});
+        AppStore.checkAdmin(this.setAdmin)
       }.bind(this)
     });
   },
-  componentDidMount: function(){
-    this.loadContact();
+  setAdmin: function(isAdmin){
+    this.setState(isAdmin);
   },
   render: function(){
     var inner;
+    var self = this;
     var c = this.state.contact;
     var img = c.img;
     var name = c.name;
@@ -38,18 +46,32 @@ var SideMenu = React.createClass({
     var twitter = c.twitter;
     var location = c.location;
 
-    if (!this.state.loading){
+    if (this.state.loading) {
+      inner = (<div><Loading /></div>);
+    }
+
+    if (!this.state.loading && !this.state.isAdmin){
       inner = (<div>
                 <a href="/"><img className="img-responsive" src={img} alt="profile pic"/></a>
                 <h1> {name} </h1>
-                <span> {github} </span>
-                <span> {email} </span>
-                <span> {phone} </span>
-                <span> {twitter} </span>
-                <span> {location} </span>
+                <p>
+                  <a href={github}>
+                    <img className="icons" src="/images/github.png" />
+                  </a>
+                  <a href={email}>
+                    <img className="icons" src="images/email.png" />
+                  </a>
+                   {phone}
+                  <a href={twitter}>
+                    <img className="icons" src="images/twitter.png" />
+                  </a>
+                   {location}
+                </p>
               </div>);
-    } else {
-      inner = (<div><Loading /></div>);
+    } else if (!this.state.loading && this.state.isAdmin) {
+      inner = (<div>
+                <AdminContact />
+              </div>);
     }
     return inner;
   }

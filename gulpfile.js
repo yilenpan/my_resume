@@ -46,6 +46,11 @@ gulp.task('buildcss', function() {
     .pipe(gulp.dest('dist/styles'));
 });
 
+gulp.task('fonts', function(){
+  gulp.src("./bower_components/bootstrap/fonts/*.*")
+      .pipe(gulp.dest('dist/fonts'));
+});
+
 gulp.task('copy', function(){
   gulp.src(path.HTML)
       .pipe(gulp.dest('dist'));
@@ -58,7 +63,7 @@ gulp.task('images', function() {
     .pipe(gulp.dest("dist/images"));
 });
 
-gulp.task('build', ['browserify', 'copy', 'buildbower','buildcss','images']);
+gulp.task('build', ['fonts','browserify', 'copy', 'buildbower','buildcss','images']);
 
 gulp.task('default', ['copy','browserify', 'buildcss']);
 

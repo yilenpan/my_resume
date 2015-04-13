@@ -67,8 +67,8 @@ CONTACT = {
         "name":"Yilen Pan",
         "email":"Yilen.Pan@gmail.com",
         "phone":"510-207-9833",
-        "github":"yilenpan",
-        "twitter":"@YiPz",
+        "github":"http://www.github.com/yilenpan",
+        "twitter":"http://www.twitter.com/YiPz",
         "location":"Oakland, CA, USA"
         }
     }
