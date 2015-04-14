@@ -12,9 +12,7 @@ var currentContact;
 var bio, projects, education;
 
 function _getBlog(data){
-  console.log('added data to store');
   currentBlog = data;
-  console.log(currentBlog);
 }
 
 function _addBlogPost(post){
@@ -23,22 +21,24 @@ function _addBlogPost(post){
 }
 
 function _setContact(data) {
-  console.log('_setContact set');
   currentContact = data;
-  console.log(currentContact);
 }
 
 function _updateContact(data) {
   _setContact({contact: data});
-  console.log('"sending" new contact to server');
   //make ajax post to the server
 }
 
 function _setResume(data) {
-  console.log('setting resume');
   bio = data.bio;
   projects = data.projects;
   education = data.education;
+}
+
+function _updateBio(data) {
+  bio = data;
+  console.log('updated bio');
+  //make ajax post to the server
 }
 
 // end store functions
@@ -54,7 +54,6 @@ var AppStore = merge(EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback)
   },
   currentPage: function(page) {
-    console.log('in appStore getting page: ' + page);
     cpage = (page-1) * 5;
     return currentBlog.slice(cpage, cpage + 5);
   },
@@ -79,8 +78,6 @@ var AppStore = merge(EventEmitter.prototype, {
     return education;
   },
   getContact: function(){
-    console.log("fetching contact from getContact");
-    console.log(currentContact);
     return currentContact.contact;
   },
   dispatcherIndex: AppDispatcher.register(function(payload){
@@ -108,6 +105,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'updateContact':
         _updateContact(payload.action.data);
+        break;
+
+      case 'updateBio':
+        _updateBio(payload.action.data);
         break;
     }
     AppStore.emitChange();

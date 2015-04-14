@@ -26,14 +26,8 @@ var AdminAddBlog = React.createClass({
     var title = React.findDOMNode(this.refs.title).value.trim();
     var content = React.findDOMNode(this.refs.post).value.trim();
     var data = {title:title, summary: summarize(content), content: content, date: date.toString()};
-    console.log(data);
     AppActions.addBlogPost(data);
     this.showPostForm();
-    //send data to server
-    console.log('data sent');
-  },
-  componentDidMount: function(){
-    console.log('admin did mount');
   },
   render: function(){
     var inner = <p><span onClick={this.showPostForm} className="glyphicon glyphicon-plus" aria-hidden="true"></span></p>;

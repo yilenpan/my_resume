@@ -9,6 +9,7 @@ function getProjects() {
 
 var Projects = React.createClass({
   getInitialState: function(){
+    console.log('admin projects');
     return {data: getProjects()};
   },
   render: function(){
@@ -16,6 +17,7 @@ var Projects = React.createClass({
       return (
         <div className="col-sm-6 col-md-4">
           <div className="thumbnail">
+            <h1>Admin</h1>
             <img src={project.images} alt={project.title} />
             <div className="caption">
               <h4>{project.datesWorked}</h4>

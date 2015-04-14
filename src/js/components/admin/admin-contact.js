@@ -10,7 +10,6 @@ function getContact() {
 
 var AdminContact = React.createClass({
   getInitialState: function(){
-    console.log("admincontact initial state");
     return {contact: {}, loading:true, isAdmin: false, editImg: false, editName: false};
   },
   componentWillMount: function(){

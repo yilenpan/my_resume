@@ -31,9 +31,9 @@ var AppActions = {
       data: data
     })
   },
-  updateContact: function(data) {
+  updateBio: function(data) {
     AppDispatcher.handleViewAction({
-      actionType:"updateContact",
+      actionType:'updateBio',
       data: data
     })
   }

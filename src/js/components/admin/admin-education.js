@@ -9,6 +9,7 @@ function getEducation() {
 
 var Education = React.createClass({
   getInitialState: function(){
+    console.log('admin education');
     return {data: getEducation()};
   },
   render: function(){
@@ -16,7 +17,7 @@ var Education = React.createClass({
       var minor = school.minor != '' ? " with a minor in " + school.minor : '';
       return (
           <div>
-            <h3>{school.name}</h3>
+            <h3>{school.name} admin</h3>
             <p>Location: {school.location}</p>
             <p>Studying: {school.major}{minor}</p>
             <p>Degree: {school.degree}</p>

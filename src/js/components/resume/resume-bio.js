@@ -24,7 +24,7 @@ var Bio = React.createClass({
 
 
     return (<div className="row">
-            <h1>{name}</h1>
+            <h1>{name} not admin</h1>
             <h3>{title}</h3>
             <h2>Skills</h2>
             {skills}
