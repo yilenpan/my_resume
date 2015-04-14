@@ -8,10 +8,12 @@ var Bio = require('./resume-bio.js');
 var Projects = require('./resume-projects.js');
 var Education = require('./resume-education.js');
 var Map = require('../maps/map.js');
+var AdminBio = require("../admin/admin-bio.js");
+var AdminProjects = require("../admin/admin-projects.js");
+var AdminEducation = require("../admin/admin-education.js");
 
-//TODO: Send data from json to the store.
-//have resume bio, education, projects call from the store
-//check admin here, if Admin, call from <AdminResume /> folder
+
+
 //in AdminResume allow for things to be added and edited.
 
 
@@ -43,7 +45,7 @@ var Resume = React.createClass({
   render: function(){
     console.log('render resume');
     var inner;
-    if (!this.state.loading){
+    if (!this.state.loading && !this.state.isAdmin){
       inner = (<div className="container">
                 <Bio />
                 <h1> Projects </h1>
@@ -52,7 +54,19 @@ var Resume = React.createClass({
                 <Education />
                 <h1> Where I worked </h1>
                 <Map latitude={37.779277} longitude={-122.41927} zoom={12} width={600} height={400}
-                points={this.state.points}/>
+                points={this.getPoints()}/>
+              </div>
+              );
+    } else if (!this.state.loading && this.state.isAdmin) {
+      inner = (<div className="container">
+                <AdminBio />
+                <h1> Projects </h1>
+                <AdminProjects />
+                <h1> Education </h1>
+                <AdminEducation />
+                <h1> Where I worked </h1>
+                <Map latitude={37.779277} longitude={-122.41927} zoom={12} width={600} height={400}
+                points={this.getPoints()}/>
               </div>
               );
     } else {

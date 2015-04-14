@@ -35,6 +35,7 @@ function _updateContact(data) {
 }
 
 function _setResume(data) {
+  console.log('setting resume');
   bio = data.bio;
   projects = data.projects;
   education = data.education;
@@ -64,6 +65,18 @@ var AppStore = merge(EventEmitter.prototype, {
     console.log("in store, checking admin: "+document.cookie);//makes ajax call to see if admin
     var data = {isAdmin: true};
     callback(data);
+  },
+  getBio: function() {
+    console.log("getBio");
+    return bio;
+  },
+  getProjects: function(){
+    console.log('getProjects');
+    return projects;
+  },
+  getEducation: function(){
+    console.log('getEducation');
+    return education;
   },
   getContact: function(){
     console.log("fetching contact from getContact");

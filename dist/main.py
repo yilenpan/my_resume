@@ -84,11 +84,8 @@ app = webapp2.WSGIApplication([
     ('/resume.json', ResumeJSON),
     ('/resume', IndexPage),
     ('/blog', IndexPage),
-    #('/blog/([0-9]+)', IndexPage),
+    #('/blog/0', IndexPage),
     ('/blog/json/([0-9]+)', BlogPostJSON),
-    ('/admin', IndexPage), #TODO: Make an admin page which accepts post requests in json
-    ('/admin/blog', IndexPage),
-    ('/admin/resume', IndexPage),
     ('/about', IndexPage),
     ('/about.json', AboutJSON),
     ('/blog.json', BlogJSON),
