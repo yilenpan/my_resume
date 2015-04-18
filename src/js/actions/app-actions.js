@@ -36,6 +36,12 @@ var AppActions = {
       actionType:'updateBio',
       data: data
     })
+  },
+  updateProj: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType:'updateProj',
+      data: data
+    })
   }
 };
 

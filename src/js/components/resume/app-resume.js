@@ -59,9 +59,7 @@ var Resume = React.createClass({
     } else if (!this.state.loading && this.state.isAdmin) {
       inner = (<div className="container">
                 <AdminBio />
-                <h1> Projects </h1>
                 <AdminProjects />
-                <h1> Education </h1>
                 <AdminEducation />
                 <h1> Where I worked </h1>
                 <Map latitude={37.779277} longitude={-122.41927} zoom={12} width={600} height={400}/>

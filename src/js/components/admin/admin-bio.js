@@ -19,7 +19,6 @@ var Bio = React.createClass({
     this.setState({editTitle:true});
   },
   updateName: function(e){
-    //TODO: send to store
     e.preventDefault();
     var r = this.state.data;
     var name = React.findDOMNode(this.refs.bio_name).value.trim();
@@ -28,7 +27,6 @@ var Bio = React.createClass({
     this.setState({editName:false});
   },
   updateTitle: function(e){
-    //TODO: send to store
     e.preventDefault();
     var r = this.state.data;
     var title = React.findDOMNode(this.refs.bio_title).value.trim();

@@ -41,6 +41,12 @@ function _updateBio(data) {
   //make ajax post to the server
 }
 
+function _updateProj(data) {
+  projects = data;
+  console.log('updated projects');
+  //make ajax post to the server
+}
+
 // end store functions
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -109,6 +115,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'updateBio':
         _updateBio(payload.action.data);
+        break;
+
+      case 'updateProj':
+        _updateProj(payload.action.data);
         break;
     }
     AppStore.emitChange();
