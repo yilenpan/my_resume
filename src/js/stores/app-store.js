@@ -25,8 +25,19 @@ function _setContact(data) {
 }
 
 function _updateContact(data) {
-  _setContact({contact: data});
-  //make ajax post to the server
+  //console.log(JSON.stringify(data));
+  $.ajax('/contact.json', {
+    type: 'post',
+    data: {'contact': JSON.stringify(data)},
+    success: function(data){
+      console.log('success');
+      console.log(data);
+      _setContact(data);
+    },
+    error: function(e){
+      console.log(e);
+    }
+  });
 }
 
 function _setResume(data) {
@@ -47,6 +58,9 @@ function _updateProj(data) {
   //make ajax post to the server
 }
 
+function _updateEdu(data) {
+  education = data;
+}
 // end store functions
 
 var AppStore = merge(EventEmitter.prototype, {
@@ -68,8 +82,16 @@ var AppStore = merge(EventEmitter.prototype, {
   },
   checkAdmin: function(callback){
     console.log("in store, checking admin: "+document.cookie);//makes ajax call to see if admin
-    var data = {isAdmin: true};
-    callback(data);
+    var cookie = document.cookie;
+    $.ajax("/admin", {
+      type: 'post',
+      dataType: 'json',
+      data: {'cookie': cookie},
+      success: function(data){
+        console.log(data);
+        callback(data);
+      }
+    });
   },
   getBio: function() {
     console.log("getBio");
@@ -119,6 +141,10 @@ var AppStore = merge(EventEmitter.prototype, {
 
       case 'updateProj':
         _updateProj(payload.action.data);
+        break;
+
+      case 'updateEdu':
+        _updateEdu(payload.action.data);
         break;
     }
     AppStore.emitChange();

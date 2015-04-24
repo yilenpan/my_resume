@@ -6,6 +6,8 @@ var Splash = require('./splash/app-splash.js'),
     Blog = require('./blog/app-blog.js'),
     BlogPost = require('./blog/app-blogpost.js'),
     Resume = require('./resume/app-resume.js'),
+    Register = require('./user/app-register.js'),
+    Login = require('./user/app-login.js'),
     Header = require('./template/header.js'),
     SideMenu = require('./template/sidemenu.js'),
     About = require('./about/app-about.js');
@@ -25,15 +27,15 @@ var APP = React.createClass({
           </div>
           <div className="col-xs-9 content">
             <SubHeader />
-            <div className="col-xs-12">
-            <Locations>
+            <Locations className="row">
               <Location path="/" handler={Splash} />
+              <Location path="/register" handler={Register} />
+              <Location path="/login" handler={Login} />
               <Location path="/blog" handler={Blog} />
               <Location path="/blog/:id" handler={BlogPost} />
               <Location path="/resume" handler={Resume} />
               <Location path="/about" handler={About} />
             </Locations>
-            </div>
           </div>
         </div>
       </div>

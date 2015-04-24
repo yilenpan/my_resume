@@ -19,6 +19,12 @@ var AppActions = {
       data: data
     })
   },
+  updateContact: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType:'updateContact',
+      data: data
+    })
+  },
   addBlogPost: function(data) {
     AppDispatcher.handleViewAction({
       actionType:'addBlogPost',
@@ -40,6 +46,12 @@ var AppActions = {
   updateProj: function(data) {
     AppDispatcher.handleViewAction({
       actionType:'updateProj',
+      data: data
+    })
+  },
+  updateEdu: function(data) {
+    AppDispatcher.handleViewAction({
+      actionType: 'updateEdu',
       data: data
     })
   }

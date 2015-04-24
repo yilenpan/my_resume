@@ -23,11 +23,32 @@ var Education = React.createClass({
   },
   addSchool: function(e){
     //TODO: get data
+
     e.preventDefault();
+    var newSchool = {};
+    newSchool.name = React.findDOMNode(this.refs.schoolName).value.trim();
+    newSchool.location = React.findDOMNode(this.refs.schoolLocation).value.trim();
+    newSchool.major = React.findDOMNode(this.refs.schoolMajor).value.trim();
+    newSchool.minor = React.findDOMNode(this.refs.schoolMinor).value.trim();
+    newSchool.degree = React.findDOMNode(this.refs.schoolDegree).value.trim();
+    newSchool.years = React.findDOMNode(this.refs.schoolDates).value.trim();
+    console.log("newSchool obj:");
+    console.log(newSchool);
+
+    this.state.data.schools.push(newSchool);
     this.setState({showSchool: false});
   },
   addOC: function(e){
     e.preventDefault();
+    var newOC = {};
+    newOC.school = React.findDOMNode(this.refs.ocName).value.trim();
+    newOC.location = React.findDOMNode(this.refs.ocLocation).value.trim();
+    newOC.url = React.findDOMNode(this.refs.ocURL).value.trim();
+    newOC.title = React.findDOMNode(this.refs.ocStudying).value.trim();
+    newOC.date = React.findDOMNode(this.refs.ocDates).value.trim();
+    console.log('newOC obj:');
+    console.log(newOC);
+    this.state.data.onlineCourses.push(newOC);
     this.setState({showOC: false});
   },
   render: function(){
