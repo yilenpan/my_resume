@@ -20,6 +20,7 @@ import jinja2
 import json
 #dummy data
 from resume import *
+from handlers import *
 from google.appengine.ext import db
 #from google.appengine.ext import blobstore
 #from google.appengine.ext.webapp import blobstore_handlers
@@ -29,8 +30,9 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), aut
 
 #models
 class User(db.Model):
-    first_name = db.StringProperty(required=True)
-    last_name = db.StringProperty(required=True)
+    firstname = db.StringProperty(required=True)
+    lastname = db.StringProperty(required=True)
+    username = db.StringProperty(required=True)
     email = db.EmailProperty(required=True)
     password = db.StringProperty(required=True)
 
@@ -57,6 +59,7 @@ class Contact(db.Model):
     github = db.StringProperty()
     twitter = db.StringProperty()
     location = db.StringProperty()
+    belongsTo = db.StringProperty(required=True)
 
     def to_dict(self):
         return dict([(p, unicode(getattr(self, p))) for p in self.properties()])
@@ -95,7 +98,6 @@ class IndexPage(Handler):
     def get(self):
         self.render_index()
 
-
 class RegisterPage(Handler):
     def render_index(self):
         self.render('index.html')
@@ -104,8 +106,30 @@ class RegisterPage(Handler):
         self.render_index()
 
     def post(self):
-        body = self.request.body
-        self.write(body)
+        username = escape_html(self.request.get('username'))
+        firstname = escape_html(self.request.get('firstname'))
+        lastname = escape_html(self.request.get('lastname'))
+        password = salt_password(escape_html(self.request.get('password')))
+        cpassword = salt_password(escape_html(self.request.get('cPassword')))
+        email = escape_html(self.request.get('email'))
+        #TODO: verify input, send errors back if ant
+
+        github = escape_html(self.request.get('github'))
+        phone = escape_html(self.request.get('phone'))
+        img = escape_html(self.request.get('img'))
+        location = escape_html(self.request.get('location'))
+        twitter = escape_html(self.request.get('twitter'))
+
+        if cpassword:
+            user = User(username=username, firstname=firstname, lastname=lastname, email=email, password=password)
+            user.put()
+            contact = Contact(img=img, email=email, name=firstname+" "+lastname, belongsTo=str(user.key().id()), github=github, location=location, phone=phone, twitter=twitter)
+            contact.put()
+            user_cookie = make_secure_val(str(user.key().id()))
+            self.response.headers.add_header('Set-Cookie', 'user_id=%s;Path=/' % user_cookie)
+            self.write('success')
+        else:
+            self.write('error')
 
 
 class Login(Handler):
@@ -187,9 +211,13 @@ class ContactJSON(Handler):
 
 class Admin(Handler):
     def post(self):
-        cookie = self.request.get('cookie')
-        print cookie
-        self.write(json.dumps({'isAdmin': False}))
+        user_id = self.request.cookies.get('user_id')
+        print user_id
+        user = get_user(user_id)
+        if user:
+            self.write(json.dumps({'isAdmin': True}))
+        else:
+            self.write(json.dumps({'isAdmin': False}))
 
 
 def getUser(email):

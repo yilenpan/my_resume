@@ -2,35 +2,65 @@
 
 var React = require('react');
 var Link = require('react-router-component').Link;
+var AppStore = require('../../stores/app-store.js');
 
 //need to check if registered
 
 var Register = React.createClass({
-  submit: function(e){
-    e.preventDefault();
-    var contact = $('#contact').serialize(),
-        userinfo = $('#userinfo').serialize();
-    var data = contact+userinfo;
-    console.log(data);
-    $.ajax('/register',{
-      type: 'POST',
-      data: data,
-      success: function(data){
-        console.log(data);
-      },
-      error: function(e){
-        console.log(e);
+  componentWillMount: function(){
+    AppStore.checkAdmin(function(data){
+      if (data.isAdmin){
+        window.location.replace('/blog');
       }
     });
+  },
+  submit: function(e){
+    e.preventDefault(); //need to verify data
+    var password = React.findDOMNode(this.refs.password).value.trim(),
+        cpassword = React.findDOMNode(this.refs.cPassword).value.trim();
+    if(password == cpassword){
+      var contact = $('#contact').serialize(),
+          userinfo = $('#userinfo').serialize();
+      var data = contact+"&"+userinfo;
+      console.log(data);
+      $.ajax('/register',{
+        type: 'POST',
+        data: data,
+        success: function(data){
+          if( data == 'success' ){
+            window.location.replace('/blog');
+          }
+        },
+        error: function(e){
+          //if error, take message from error and append to something
+          console.log(e);
+        }
+      });
+    } else {
+      console.log('passwords dont match');
+    }
   },
   render: function(){
     return (
       <div className="col-xs-12">
+          <span className="error"></span>
           <div className="col-xs-12">
             <h1>User Info</h1>
           </div>
           <div className="col-xs-12">
             <form id="userinfo" className="form-group">
+              <div className="form-group">
+                <label className="col-sm-2 control-label">First Name: </label>
+                <div className="col-sm-10">
+                  <input name="firstname" ref="firstname" className="form-control" type="text" placeholder="First name" />
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="col-sm-2 control-label">Last Name: </label>
+                <div className="col-sm-10">
+                  <input name="lastname" ref="lastname" className="form-control" type="text" placeholder="Last name" />
+                </div>
+              </div>
               <div className="form-group">
                 <label className="col-sm-2 control-label">Username: </label>
                 <div className="col-sm-10">
@@ -64,15 +94,15 @@ var Register = React.createClass({
           <div className="col-xs-12">
             <form id="contact" className="form-group">
               <div className="form-group">
-                <label className="col-sm-2 control-label">Github: </label>
+                <label className="col-sm-2 control-label">Link to Profile Pic: </label>
                 <div className="col-sm-10">
-                  <input name="github" ref="github" className="form-control" type="text" placeholder="Github" />
+                  <input name="img" ref="img" className="form-control" type="text" placeholder="Image URL" />
                 </div>
               </div>
               <div className="form-group">
-                <label className="col-sm-2 control-label">Email: </label>
+                <label className="col-sm-2 control-label">Github: </label>
                 <div className="col-sm-10">
-                  <input name="email" ref="email" className="form-control" type="text" placeholder="Email"/>
+                  <input name="github" ref="github" className="form-control" type="text" placeholder="Github" />
                 </div>
               </div>
               <div className="form-group">

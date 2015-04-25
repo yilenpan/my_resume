@@ -17,9 +17,6 @@
 import webapp2
 import os
 import jinja2
-import stripe
-import urllib
-from PyPDF2 import PdfFileReader
 import random
 import time
 import cgi
@@ -33,7 +30,7 @@ from google.appengine.ext import db
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from secret import *
-from objects import *
+
 
 def escape_html(s):
     return cgi.escape(s, quote = True)
@@ -57,18 +54,22 @@ class Handler(webapp2.RequestHandler):#keep this shit
 def hash_str(s):
     return hmac.new(SECRET, s).hexdigest()
 
+
 def make_secure_val(s):
     return "%s|%s" % (s, hash_str(s))
+
 
 def salt():
     size=32
     chars=string.ascii_uppercase + string.digits + string.ascii_lowercase
     return ''.join(random.choice(chars) for _ in range(size))
 
+
 def salt_password (s, v =''):
     if v == '':
         v = salt()
     return "%s|%s" % ( v , hash_str(s + v))
+
 
 def verify_password(u, p):
     user = db.GqlQuery("SELECT * FROM User WHERE email = :1", u).get()
@@ -78,11 +79,14 @@ def verify_password(u, p):
         if h == salt_password(p, salt):
             return user.key().id()
 
+
 def check_secure_val(h):
     val = h.split('|')[0]
     if h == make_secure_val(val):
         return val
 
+#takes user_id val from cookie, checks to see if secure val
+#if secure then returns user object
 def get_user(user):
     if user:
         user_id = check_secure_val(user)
@@ -91,15 +95,6 @@ def get_user(user):
             user = db.get(key)
             return user
 
-def verify_invoice(i_num, p_num):
-    invoice = db.GqlQuery("SELECT * FROM Invoice WHERE invoice_number = :1", i_num).get()
-    if(invoice):
-        if (invoice.po_number == p_num):
-           return invoice.key().id()
-
-def get_unpaid():
-    invoices = Invoice.all().filter("paid =", False)
-    return invoices
 
 #sign up
 PASS_RE = re.compile(r"^.{3,20}$")
@@ -112,11 +107,6 @@ TEXT_RE = re.compile(r"^.{3,45}$")
 def ver_text(text):
     if TEXT_RE.match(text):
         return text
-
-INVOICE_RE = re.compile(r"^[0-9]{8}$")
-def ver_invoice_num(inv_num):
-    if INVOICE_RE.match(inv_num):
-        return inv_num
 
 def dup_email(u):
     v = db.GqlQuery("SELECT * FROM User WHERE email = :1", u).get()
@@ -149,13 +139,6 @@ def isAdmin(user_id):
         if(admin):
             return admin
 
-def add_invoice_to_user(email, key_id):
-    user = db.GqlQuery("SELECT * FROM User WHERE email = :1", email).get()
-    if user:
-        key = str(key_id)
-        if not key in user.invoices:
-            user.invoices.append(key)
-        user.put()
 
 def isPDF(blob_key):
     blob_reader = blobstore.BlobReader(blob_key, buffer_size=1048576)
